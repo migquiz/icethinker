@@ -1,6 +1,14 @@
-## What's In The Box ?
+## Icethinker
 
-Codes as a solution to the problems from the book.  
-Some may contain comments or nothing at all.  
-Author may add other things for learning purposes.  
-Feel free to read and modify.
+The repository's name was derived from the programming
+language used, C++. If you spell the language's
+name in English, it would be "see plus plus", taking
+note of this, the author, Miguel, put some humour in it.
+In order to see more , you need eyes and by homonym, the
+"ice" with the "thinker" denotes "the thinker's C++"
+
+#### In the Box
+
+Source codes written for the problems from the book.  
+It may contain unnecessary comments or nothing at all
+and other instructions not mainly from the book.
