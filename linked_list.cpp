@@ -4,11 +4,26 @@
 #include <iostream>
 using namespace std;
 
-int main (int argc, char ** argv) {
+int main (int argc, char **argv) {
 	
 	typedef struct node {
 		int num;
-		struct node * next;
+		struct node *next;
+	}
+
+	//searching
+
+	bool search (int n, node *list) {
+		node *ptr = list;
+		while (ptr!= NULL) {
+			if (ptr->num ==n) { //when accessing a data 
+				//in a struct/class through a pointer
+				//use this ->
+				return true;
+			}
+			ptr = ptr->next;
+		}
+		return false;
 	}
 
 	return 0;
