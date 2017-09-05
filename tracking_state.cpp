@@ -38,7 +38,7 @@ int mod9 (int number) {
 
 int main (int argc, char ** argv) {
 
-	enum modType {
+	enum modType { //modulus type, state of decoding
 		UPPERCASE, LOWERCASE, PUNCTUATION
 	};
 
@@ -52,12 +52,12 @@ int main (int argc, char ** argv) {
 		int number = (digitChar - '0'); //convert to int
 		digitChar = cin.get(); //next digit
 
-		while ((digitChar != 10) && (digitChar != ',')) {
+		while ((digitChar != 10) && (digitChar != ',')) { // converting into number and comma/eof delimiter
 			number = number * 10 + (digitChar - '0');
 			digitChar = cin.get();
 		}
 
-		int mod_res;
+		int mod_res; //modulus value
 
 		switch (mode) {
 
@@ -90,7 +90,7 @@ int main (int argc, char ** argv) {
 
 		}
 
-	} while (digitChar != 10); //to check the end line
+	} while (digitChar != 10); //to check the end line , prioritized last because have to checked last
 	
 	return 0;
 }

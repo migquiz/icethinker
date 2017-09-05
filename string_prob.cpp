@@ -4,14 +4,14 @@
 using namespace std;
 
 //define a type string
-typedef char * arrayString;
+typedef char * arrayString; //size unknown
 
 char characterAt (arrayString s, int position) {
 	
 	return s[position];
 }
 
-int length(arrayString s) {
+int getlength(arrayString s) {
 	int count = 0;
 
 	while (s [count] != 0) {
@@ -21,9 +21,9 @@ int length(arrayString s) {
 	return count;
 }
 
-void append (arrayString & s, char c) {
+void append (arrayString & s, char c) { //allocated heap memory on the parameter
 
-	int length = length (s);
+	int length = getlength (s);
 
 	cout << "Append | Length | " << length << endl;
 
@@ -42,7 +42,26 @@ void append (arrayString & s, char c) {
 }
 
 void concatenate (arrayString & s1, arrayString s2) {
-		
+	//get the length of the two strings
+
+	int first_string_length = getlength (s1);
+	int second_string_length = getlength (s2);
+	int concatenated_string_length = first_string_length + second_string_length;
+
+	arrayString new_string = new char [concatenated_string_length + 1]; //to add null or 0 character
+
+	for (int i = 0; i < first_string_length; ++i) { //copy the characters into the new_string
+		new_string[i] = s1[i];
+	}
+
+	for (int i = 0; i < second_string_length; ++i) {
+		new_string[first_string_length + i] = s2[i];
+	}
+
+	new_string[concatenated_string_length] = 0;
+	delete [] s1;
+	s1 = new_string;
+
 }
 
 
@@ -53,6 +72,12 @@ int main (int argc, char ** argv) {
 	append (param_string , 'c');
 
 	cout << param_string << " | " << &param_string << endl;
+
+	arrayString concat_first = "concat", concat_second = "enate";
+
+	concatenate (concat_first , concat_second);
+
+	cout << "RESULT : " << concat_first << endl; //concatenation complete
 
 	return 0;
 }
