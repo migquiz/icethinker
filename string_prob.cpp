@@ -64,6 +64,19 @@ void concatenate (arrayString & s1, arrayString s2) {
 
 }
 
+char * substring (arrayString & array_string , int position, int length) {
+	//assume position is from zero-based
+	char * substring_res = new char[length];
+	int count = 0;
+
+	for (int i = position; position != NULL; ++position) {
+		substring_res[count] = array_string[position];
+		++count;
+	}
+
+	return substring_res;
+}
+
 
 int main (int argc, char ** argv) {
 

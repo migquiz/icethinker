@@ -19,5 +19,23 @@ int main (int argc, char** argv) {
 	//conclusion is array are pointers too.
 	int* pt_array = array_of_num;
 
+	int num = 9;
+	int* pointer = &num;
+
+	cout << "Num | " << num << endl;
+	cout << "Num Pointer | " << *pointer << endl;
+	cout << "Num Address | " << &num << endl;
+	cout << "Num Pointer Address | " << pointer << endl;
+	cout << "------------------------------------------" << endl;
+
+	int& num_ref = *pointer;
+
+	num_ref = 3;
+
+	cout << "Num | " << num << endl;
+	cout << "Num Pointer | " << *pointer << endl;
+	cout << "Num Address | " << &num << endl;
+	cout << "Num Pointer Address | " << pointer << endl;
+
 	return 0;
 }
