@@ -1,6 +1,9 @@
 //This program contains sample codes for classes
 //written on C++
 
+//Client code utilizes the interfaces
+//Server Code which has the implementation
+
 #include <iostream>
 using namespace std;
 
@@ -20,7 +23,7 @@ int main(int argc, char ** argv) {
 
 	cout << foo_sample.getSample() << endl;
 
-	sample with_def;
+	sample with_def(3);
 	cout << with_def.getSample() << endl;
 
 	return 0;
