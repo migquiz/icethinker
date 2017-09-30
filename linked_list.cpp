@@ -6,25 +6,54 @@ using namespace std;
 
 int main (int argc, char **argv) {
 	
-	typedef struct node {
+	struct node {
 		int num;
-		struct node *next;
+		node * next;
+	};
+
+	typedef node * linked_list;
+
+	linked_list head_pointer = NULL;
+
+	cout << "---------------" << endl;
+
+	node * first_node = new node;
+	cout << &first_node << " first_node address" << endl;
+
+	node * dummy = new node;
+	cout << &dummy << " dummy node address" << endl;
+
+	cout << "----------------" << endl;
+	dummy = first_node;
+	cout << &dummy << " dummy node address" << endl;
+	cout << &first_node << " first_node adress" << endl;
+
+	first_node->num = 9;
+	first_node->next = head_pointer;
+	head_pointer = first_node;
+
+	node * loop_pointer = head_pointer;
+
+	if (loop_pointer != NULL) {
+		cout << "loop pointer not null" << loop_pointer << endl;
+	} else {
+		cout << "ala e' null" << endl;
 	}
 
-	//searching
-
-	bool search (int n, node *list) {
-		node *ptr = list;
-		while (ptr!= NULL) {
-			if (ptr->num ==n) { //when accessing a data 
-				//in a struct/class through a pointer
-				//use this ->
-				return true;
-			}
-			ptr = ptr->next;
-		}
-		return false;
+	if (NULL == 0) {
+		cout << "null is zero" << endl;
 	}
+
+	loop
+
+	cout << "loop_pointer : " << &loop_pointer << endl;
+	cout << "head_pointer : " << &head_pointer << endl;
+	cout << loop_pointer->num << endl;
+
+	cout << "------------" << endl;
+	cout << &first_node << endl;
+	cout << &head_pointer << endl;
+	cout << &dummy << endl;
 
 	return 0;
 }

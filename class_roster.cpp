@@ -18,40 +18,40 @@ for the class.
 using namespace std;
 
 class studentRecord {
-	public:
-   		studentRecord();
-		studentRecord(int newGrade, int newID, string newName);
-		void setGrade(int newGrade);
-		void setStudentID(int newID);
-		void setName(string newName);
-		int studentID();
-		int grade();
-		bool isValidGrade(int grade);
-		string name();
-		string letterGrade();
-	private:
-		int _grade;
-		int _studentID;
-		string _name;
+public:
+	studentRecord ();
+	studentRecord (int newGrade, int newID, string newName);
+	void setGrade (int newGrade);
+	void setStudentID (int newID);
+	void setName (string newName);
+	int studentID ();
+	int grade ();
+	bool isValidGrade (int grade);
+	string name ();
+	string letterGrade ();
+private:
+	int _grade;
+	string _name;
+	int _studentID;
 };
 
-int studentRecord::grade() {
+int studentRecord::grade () {
 	return _grade;
 }
 
-int studentRecord::studentID() {
+int studentRecord::studentID () {
 	return _studentID;
 }
 
-string studentRecord::name() {
+string studentRecord::name () {
 	return _name;
 }
 
-void studentRecord::setStudentID(int newID) {
+void studentRecord::setStudentID (int newID) {
 	_studentID = newID;
 }
 
-void studentRecord::setGrade(int newGrade) {
+void studentRecord::setGrade (int newGrade) {
 	if (isValidGrade(newGrade))
 	_grade = newGrade;
 }
@@ -72,7 +72,7 @@ studentRecord::studentRecord () {
 	setName("");
 }
 
-bool studentRecord::isValidGrade(int grade) {
+bool studentRecord::isValidGrade (int grade) {
 	if ((grade >= 0) && (grade <= 100)){
 		return true;
 	} else {
@@ -82,7 +82,7 @@ bool studentRecord::isValidGrade(int grade) {
 
 //take note of this implementation
 //instead of if else or switch
-string studentRecord::letterGrade() {
+string studentRecord::letterGrade () {
 	const int NUMBER_OF_CATEGORIES = 11;
 	const string GRADE_LETTER[] = {"F","D","D+","C-","C","C+","B-","B","B+","A-","A"};
 	const int LOWEST_GRADE_SCORE[] = {0,60,67,70,73,77,80,83,87,90,93};
@@ -95,13 +95,82 @@ string studentRecord::letterGrade() {
 	return GRADE_LETTER[category - 1];
 }
 
+//this class involves "composition"
+//when an object needs other to complete itself
+//in designing a class , ask what should i send out
+//question is helpful.
+class studentCollection {
+private:
+	struct studentNode {
+		studentRecord studentData;
+		studentNode * next;
+	};
+public:
+	studentCollection ();
+	void addRecord (studentRecord newStudent);
+	studentRecord recordWithNumber (int student_ID);
+	void removeRecord (int student_ID);
+private:
+	typedef studentNode * studentList;
+	studentList _listHead;
+};
+
+studentCollection::studentCollection () {
+	_listHead = NULL;
+}
+
+void studentCollection::addRecord (studentRecord newStudent) { //inserting a node in the front
+	studentNode * newNode = new studentNode; //make a node
+	newNode->studentData = newStudent; //assign the data to the newnode's payload
+	newNode->next = _listHead; //next node is the listhead
+	_listHead = newNode; //head pointer is the new node
+}
+
+studentRecord studentCollection::recordWithNumber (int student_number) {
+	studentNode * loopPtr = _listHead; //to traverse the list
+
+	//if the list still null , no nodes at all
+	while (loopPtr != NULL && loopPtr->studentData.studentID() != student_number) {
+		loopPtr = loopPtr->next;
+	}
+	if (loopPtr == NULL) { //if the list is still null , no nodes at all
+		studentRecord dummyRecord (-1, -1, ""); //return a dummy record
+	} else {
+		return loopPtr->studentData;
+	}
+	return loopPtr->studentData;
+}
+
+void studentCollection::removeRecord (int student_ID) {
+	//traverse the link list
+	//if the node is found delete it -->
+	//think of the pointers here as addresses
+	//trailing node pointer must be renamed into "previous" node
+	studentNode * loopPtr = _listHead;
+	studentNode * trailing = NULL; //a pointer to the node in the original linked list 
+	while (loopPtr != NULL && loopPtr->studentData.studentID() != student_ID) {
+		trailing = loopPtr; //somewhere in the memory points in here
+		loopPtr = loopPtr->next;
+	}
+	if (loopPtr == NULL) return;
+	if (trailing == NULL) {
+		_listHead = _listHead->next;
+	} else {
+		trailing->next = loopPtr->next;
+	} //the previous node "next" attribute assigned with the node after the node to be del...
+	delete loopPtr;
+}
+
 int main (int argc, char ** argv) {
 
 	//declare like a normal datatype with the default constructor
 	studentRecord fooStudentRecord;
-	cout << fooStudentRecord.name() << endl;
+	cout << fooStudentRecord.name () << endl;
 	//declare like what we have on the definition
-	studentRecord booStudentRecord(90,123,"Miggy");
-	cout << booStudentRecord.letterGrade() << endl;
+	studentRecord booStudentRecord (90,123,"Miggy");
+	cout << booStudentRecord.letterGrade () << endl;
+	studentCollection student_collection;
+	student_collection.addRecord(booStudentRecord);
+	cout << student_collection.recordWithNumber(123).name() << endl;
 	return 0;
 }
