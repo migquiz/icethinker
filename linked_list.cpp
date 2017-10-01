@@ -13,47 +13,41 @@ int main (int argc, char **argv) {
 
 	typedef node * linked_list;
 
+	//***********NOTE*************
+	//no memory allocation happened
+	//no address was assigned
 	linked_list head_pointer = NULL;
 
 	cout << "---------------" << endl;
 
 	node * first_node = new node;
-	cout << &first_node << " first_node address" << endl;
-
-	node * dummy = new node;
-	cout << &dummy << " dummy node address" << endl;
-
-	cout << "----------------" << endl;
-	dummy = first_node;
-	cout << &dummy << " dummy node address" << endl;
-	cout << &first_node << " first_node adress" << endl;
+	node * second_node = new node;
+	node * third_node = new node;
 
 	first_node->num = 9;
-	first_node->next = head_pointer;
+	second_node->num = 5;
+	third_node->num = 3;
+
+	first_node->next = second_node;
+	second_node->next = third_node;
+	third_node->next = NULL;
+
+	//until an address was pointed out
+	//to here. Head Pointer and First Node
+	//has the same pointer value.
+	//It's different the memory address in the
 	head_pointer = first_node;
 
-	node * loop_pointer = head_pointer;
+	cout << head_pointer << " " << first_node << endl;
 
-	if (loop_pointer != NULL) {
-		cout << "loop pointer not null" << loop_pointer << endl;
-	} else {
-		cout << "ala e' null" << endl;
-	}
+	node * new_node = new node;
+	new_node->num = 10;
+	new_node->next = head_pointer;
+	head_pointer = new_node; //head pointer gets a new address.
 
-	if (NULL == 0) {
-		cout << "null is zero" << endl;
-	}
+	node * node_for_insert = NULL;
 
-	loop
-
-	cout << "loop_pointer : " << &loop_pointer << endl;
-	cout << "head_pointer : " << &head_pointer << endl;
-	cout << loop_pointer->num << endl;
-
-	cout << "------------" << endl;
-	cout << &first_node << endl;
-	cout << &head_pointer << endl;
-	cout << &dummy << endl;
+	cout << head_pointer << endl;
 
 	return 0;
 }

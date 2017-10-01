@@ -141,6 +141,14 @@ studentRecord studentCollection::recordWithNumber (int student_number) {
 	return loopPtr->studentData;
 }
 
+//how the trailing pointer manages to manipulate the whole linked list?
+//trailing is a pointer that points to a node
+//pointer is a compound data type that holds the address of a value.
+
+//pointers can be used to alter/disturb a structure
+//using an address, likewise if i use your
+//adress in a delivery i can force you to receive an item
+
 void studentCollection::removeRecord (int student_ID) {
 	//traverse the link list
 	//if the node is found delete it -->
@@ -150,7 +158,14 @@ void studentCollection::removeRecord (int student_ID) {
 	studentNode * trailing = NULL; //a pointer to the node in the original linked list 
 	while (loopPtr != NULL && loopPtr->studentData.studentID() != student_ID) {
 		trailing = loopPtr; //somewhere in the memory points in here
-		loopPtr = loopPtr->next;
+		//loopPtr : i have the address of the head pointer
+		//trailing : cool, i'll keep it
+		//loopPtr : i'll be deleted or deallocated in the heap memory
+		//trailing : the preceding pointer should point to me
+		//loopPtr : take note of us, we're pointing to a node pointer
+		//not really the address , an address is not the same with a data type
+		//that holds an address remember that.
+		loopPtr = loopPtr->next; //next is also a node 
 	}
 	if (loopPtr == NULL) return;
 	if (trailing == NULL) {
@@ -158,7 +173,7 @@ void studentCollection::removeRecord (int student_ID) {
 	} else {
 		trailing->next = loopPtr->next;
 	} //the previous node "next" attribute assigned with the node after the node to be del...
-	delete loopPtr;
+	delete loopPtr; //memory deallocation
 }
 
 int main (int argc, char ** argv) {
