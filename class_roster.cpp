@@ -107,16 +107,30 @@ private:
 	};
 public:
 	studentCollection ();
+	~studentCollection ();
 	void addRecord (studentRecord newStudent);
 	studentRecord recordWithNumber (int student_ID);
 	void removeRecord (int student_ID);
 private:
 	typedef studentNode * studentList;
+	void deleteList (studentList &listPtr);
 	studentList _listHead;
 };
 
 studentCollection::studentCollection () {
 	_listHead = NULL;
+}
+
+studentCollection::~studentCollection () {
+	deleteList (_listHead);
+}
+
+void studentCollection::deleteList (studentList &listPtr) {
+	while (listPtr != NULL) {
+		studentList temp = listPtr; 
+		listPtr = listPtr->next;
+		delete temp;
+	}
 }
 
 void studentCollection::addRecord (studentRecord newStudent) { //inserting a node in the front

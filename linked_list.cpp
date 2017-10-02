@@ -36,6 +36,7 @@ int main (int argc, char **argv) {
 	//to here. Head Pointer and First Node
 	//has the same pointer value.
 	//It's different the memory address in the
+	//the head pointer will hold the address of the firs node
 	head_pointer = first_node;
 
 	cout << head_pointer << " " << first_node << endl;
@@ -45,9 +46,19 @@ int main (int argc, char **argv) {
 	new_node->next = head_pointer;
 	head_pointer = new_node; //head pointer gets a new address.
 
-	node * node_for_insert = NULL;
 
-	cout << head_pointer << endl;
+	node * test_node = NULL;
+	test_node = first_node; //"take this address", said to test_node;
+	test_node->next = second_node->next; //"using that address point to the
+	delete second_node; //third note then delete the second node.
+
+	//Test Loop
+	node * iterator = NULL;
+	iterator = head_pointer;
+	while (iterator != NULL) {
+		cout << iterator->num << endl;
+		iterator = iterator->next;
+	}
 
 	return 0;
 }
