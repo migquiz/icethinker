@@ -26,3 +26,13 @@ holds. So everytime we need to get the value of any type
 in the space(memory) , we need the pointer and the means
 to get the value and that is by the use of dereferencing.
 
+*variable -- go to the address it points then its value
+&*variable -- go to the address it points then then return it.
+&**variable -- go to the address it points then its value
+which is an address then return it.
+
+Crosslinking:
+Where two pointers holds/points to the same address of a value. It can
+occurs in some cases including the Deep Copy which involves two pointer
+and a variable while Shallow Copy involve structure's and classes'data
+member and it's somewhat a larger scale of deep copy.

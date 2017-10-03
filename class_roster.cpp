@@ -113,8 +113,9 @@ public:
 	void removeRecord (int student_ID);
 private:
 	typedef studentNode * studentList;
-	void deleteList (studentList &listPtr);
 	studentList _listHead;
+	void deleteList (studentList &listPtr);
+	studentList copiedList(const studentList original);
 };
 
 studentCollection::studentCollection () {
@@ -123,6 +124,33 @@ studentCollection::studentCollection () {
 
 studentCollection::~studentCollection () {
 	deleteList (_listHead);
+}
+
+studentCollection::studentList	studentCollection::copiedList(const studentList original) {
+	if (original == NULL) {
+		return NULL;
+	}
+	studentList newList = new studentNode; //allocate a space in memory which stores an address
+	newList->studentData = original->studentData; //go to the address it points to and store the studentData which is a record
+	studentNode * oldLoopPtr = original->next; //store the value of "next" which an address that points to node
+	studentNode * newLoopPtr = newList; //store the value of newList which is an address that points to a node
+	//because the newLoopPtr shares the same value (address) that the newList holds. It can manipulate the list
+	//indirectly but the information and data still remains on the newlist even if the loopPtr value changes because
+	//it is not binded with it(newList). This is clearly leveraged crosslinking
+	while (oldLoopPtr != NULL) {
+		newLoopPtr->next = new studentNode; //new node , an address in the memory
+		newLoopPtr = newLoopPtr->next; //newLoopPtr value(address that points to) will be replaced
+		//don't be confused with the newlist. The list will build up eventually because the newList
+		//next pointer still retains it's value. After a new node was made up in the line above. The newLoopPtr
+		//will have it new value (address) because the ->next value(address) is assigned into it.
+		//so for the next iteration the the newLoopPtr will have it's next data member and so on.
+		//REMEMBER : if you're assigning to a pointer : you're not altering the value itself
+		//but the address it holds.
+		newLoopPtr->studentData = oldLoopPtr->studentData;
+		oldLoopPtr = oldLoopPtr->next;
+	}
+	newLoopPtr->next = NULL;
+	return newList;
 }
 
 void studentCollection::deleteList (studentList &listPtr) {
