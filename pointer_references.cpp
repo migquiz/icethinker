@@ -54,7 +54,7 @@ int main (int argc, char ** argv) {
 	cout << "=========== ================== ============" << endl;
 	
 	cout << "Number Variable Value: " << num << endl;
-	cout << "First Level Pointer Value: " << *first_level_pointer << endl;
+	cout << "First Level Pointer Value: " << first_level_pointer << endl;
 	cout << "Second Level Pointer Value (Stage 1) : " << *second_level_pointer << endl;
 	cout << "Second Level Pointer Value (Stage 2) : " << **second_level_pointer << endl; 
 
@@ -83,9 +83,9 @@ int main (int argc, char ** argv) {
 	int other_num = 10;
 	accidental_pt = &crosslinked_num;
 	cout << "Accidental Pointer's Dereferenced Value: " << accidental_pt << endl;
-	*orig_pt = other_num;
-	cout << "Original Pointer's Value: " << *orig_pt << endl;
+	delete orig_pt;
+	cout << "Original Pointer's Value: " << orig_pt << endl;
 	cout << "Accidental Pointer's Dereferenced Value: " << *accidental_pt << endl;
-
+ 
 	return 0;
 }

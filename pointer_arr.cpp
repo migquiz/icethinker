@@ -24,8 +24,9 @@ int main (int argc, char** argv) {
 
 	cout << "Num | " << num << endl;
 	cout << "Num Pointer | " << *pointer << endl;
-	cout << "Num Address | " << &num << endl;
-	cout << "Num Pointer Address | " << pointer << endl;
+	cout << "Num Memory Address | " << &num << endl;
+	cout << "Num Pointer's Memory Address | " << &pointer << endl;
+	cout << "Num Pointer Value (Address) | " << pointer << endl;
 	cout << "------------------------------------------" << endl;
 
 	int& num_ref = *pointer;
@@ -34,8 +35,21 @@ int main (int argc, char** argv) {
 
 	cout << "Num | " << num << endl;
 	cout << "Num Pointer | " << *pointer << endl;
-	cout << "Num Address | " << &num << endl;
-	cout << "Num Pointer Address | " << pointer << endl;
+	cout << "Num Memory Address | " << &num << endl;
+	cout << "Num Pointer Value (Address) | " << pointer << endl;
+	cout << "Num Reference | " << num_ref << endl;
+	cout << "Num Reference Memory Address | " << &num_ref << endl;
+
+	//they should change all their values.
+	//how references work is an alias.
+	//it is a type that holds the same address of the thing it references
+	//if you change the value of the "reference" it will also change the value
+	//of the variable it references.
+	*pointer = 2;
+	num_ref = *pointer;
+	cout << num << endl;
+	cout << num_ref << endl;
+	cout << *pointer << endl;
 
 	return 0;
 }

@@ -108,6 +108,8 @@ private:
 public:
 	studentCollection ();
 	~studentCollection ();
+	studentCollection(const studentCollection &original);
+	studentCollection & operator= (const studentCollection & rhs);
 	void addRecord (studentRecord newStudent);
 	studentRecord recordWithNumber (int student_ID);
 	void removeRecord (int student_ID);
@@ -124,6 +126,29 @@ studentCollection::studentCollection () {
 
 studentCollection::~studentCollection () {
 	deleteList (_listHead);
+}
+
+//copy constructor
+//in copying you use the operator loading as exposed by the use
+//of "=" sign operator. So whenever this constructor is executed
+//either explicitly or implicitly. the overload operator will
+//do its function. here we pass the "object" as a reference in const
+//to avoid altering the "object's" value that was referenced.
+studentCollection::studentCollection (const studentCollection &original) {
+	_listHead = copiedList(original._listHead);
+}
+
+//operator overloading, folks.
+//the right hand side is the parameter, the left hand is a reference
+//to data members of the class and the instance(object) of the class
+//referencing makes an impact to the value it references.
+studentCollection & studentCollection::operator = (const studentCollection & rhs) {
+	if(this != &rhs) { //this is a pointer to the type (value is an address to a type(class))
+		deleteList(_listHead);
+		_listHead = copiedList(rhs._listHead);//entirely new list with different address in the memory		
+	}
+	//return the new copied list from the right hand side , this is type StudentCollection
+	return *this;
 }
 
 studentCollection::studentList	studentCollection::copiedList(const studentList original) {
@@ -228,6 +253,8 @@ int main (int argc, char ** argv) {
 	cout << booStudentRecord.letterGrade () << endl;
 	studentCollection student_collection;
 	student_collection.addRecord(booStudentRecord);
+	studentCollection boo_collection(student_collection);
 	cout << student_collection.recordWithNumber(123).name() << endl;
+	cout << boo_collection.recordWithNumber(123).name() << endl;
 	return 0;
 }
