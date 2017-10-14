@@ -5,32 +5,35 @@
 #include <iostream>
 using namespace std;
 
+struct listNode {
+	int data{0};
+	listNode * next;
+};
+
+typedef listNode * listPtr;
+
+int count_negative(listPtr head) {
+	if (head == NULL) return 0;
+	int listCount = count_negative(head->next);
+	if (head->data < 0) listCount++;
+	return listCount;
+}
+
+//trying to implement it in a while construct
+int count_negawhile (listPtr head) {
+	int count = 0;
+	while (head != NULL) {
+		if (head->data < 0) {
+			++count;
+		}
+		head = head->next;
+	}
+	return count;
+}
 
 int main (int argc, char ** argv) {
-	
-	struct listNode {
-		int data{0};
-		listNode * next;
-	};
 
-	typedef listNode * listPtr;
-	
-	listNode * first_node = new listNode;
-	first_node->data = 9;
-	first_node->next = NULL;
-
-	listNode * second_node = new listNode;
-	second_node->data = 8;
-	second_node->next = NULL;
-
-	listNode * third_node = new listNode;
-	third_node->data = 10;
-	third_node->next = NULL;
-
-	first_node->next = second_node;
-	second_node->next = third_node;
-
-	listPtr head_pointer = first_node;
+	listPtr head_pointer = NULL;
 
 	do {
 		int input_num;
@@ -40,25 +43,17 @@ int main (int argc, char ** argv) {
 		new_node->next = head_pointer;
 		new_node->data = input_num;
 		head_pointer = new_node;
-	} while (cin);
+	} while (cin);	
 
+	//list pointer as a accessor or iterator in the list
 	listPtr list_pointer = head_pointer;
-	
-	cout << "NEGATIVE EVALUATOR" << endl;
-	while (list_pointer != NULL) {
-		
-		cout << list_pointer->data << ": ";
-				
-		if (list_pointer->data < 0) {
-			cout << "YES" << endl;
-		} else if (list_pointer->data == 0) {
-			cout << "ZER0" << endl;
-		} else {
-			cout << "NO" << endl;
-		}
 
+	while (list_pointer != NULL) {
+		cout << list_pointer->data << endl;
 		list_pointer = list_pointer->next;
 	}
 
+	cout << "The No. of Negatives: " << count_negawhile(head_pointer) << endl;
+	
 	return 0;
 }
