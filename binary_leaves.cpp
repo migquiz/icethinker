@@ -53,7 +53,5 @@ int main (int argc, char ** argv) {
 	binary_tree bin_tree;
 
 	//root node in the tree
-	bin_tree.
-
 	return 0;
 }
