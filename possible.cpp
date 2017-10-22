@@ -39,6 +39,11 @@ bool jiggs_possible (int a, int b, int &c, int &d) {
 	}
 }
 
+//implement this in stack format
+//push the elements while the a or b is greater than c or d
+//then traverse if theres a matching conversion
+
+
 bool first_func (int a, int b, int c, int d) {
 	bool tester;
 	while (b < d) {
