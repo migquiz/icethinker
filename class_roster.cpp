@@ -15,7 +15,12 @@ for the class.
 */
 
 #include <iostream>
+#include <string.h>
 using namespace std;
+
+//this was the result of poor code structuring
+//i'm not able to track the past exerices
+//so i'm going to put it in here .
 
 class studentRecord {
 public:
@@ -99,6 +104,21 @@ string studentRecord::letterGrade () {
 //when an object needs other to complete itself
 //in designing a class , ask what should i send out
 //question is helpful.
+
+typedef bool (* firstStudentPolicy) (studentRecord r1, studentRecord r2);
+
+bool higherGrade (studentRecord r1, studentRecord r2) {
+	return r1.grade() > r2.grade();
+}
+
+bool lowerStudentNumber (studentRecord r1, studentRecord r2) {
+	return r1.studentID() < r2.studentID();
+}
+
+bool nameComesFirst (studentRecord r1, studentRecord r2) {
+	return strcmp(r1.name().c_str(), r2.name().c_str()) < 0;
+}
+
 class studentCollection {
 private:
 	struct studentNode {
@@ -113,20 +133,72 @@ public:
 	void addRecord (studentRecord newStudent);
 	studentRecord recordWithNumber (int student_ID);
 	void removeRecord (int student_ID);
+	void setFirstStudentPolicy(firstStudentPolicy f);
+	studentRecord firstStudent();
+	friend class scIterator;
 private:
+	firstStudentPolicy _currentPolicy;
 	typedef studentNode * studentList;
 	studentList _listHead;
 	void deleteList (studentList &listPtr);
 	studentList copiedList(const studentList original);
 };
 
+studentRecord studentCollection::firstStudent () {
+	if (_listHead == NULL || _currentPolicy == NULL) {
+		studentRecord dummyRecord (-1, -1, "");
+		return dummyRecord;
+	}
+	studentNode * loopPtr = _listHead;
+	studentRecord first = loopPtr->studentData;
+	loopPtr = loopPtr->next;
+	while (loopPtr != NULL) {
+		if (_currentPolicy(loopPtr->studentData, first)) {
+			first = loopPtr->studentData;
+		}
+		loopPtr = loopPtr->next;
+	}
+	return first;
+}
+
+class scIterator {
+	studentCollection::studentNode * current;
+	studentRecord student();
+public:
+	scIterator();
+	scIterator(studentCollection::studentNode * initial);
+};
+
+studentRecord scIterator::student() {
+	if (current == NULL) {
+		studentRecord dummyRecord (-1, -1 , "");
+		return dummyRecord;
+	} else {
+		return current->studentData;
+	}
+}
+
+scIterator::scIterator() {
+	current = NULL;
+}
+
+scIterator::scIterator(studentCollection::studentNode * initial) {
+	current = initial;
+}
+
+void studentCollection::setFirstStudentPolicy (firstStudentPolicy f) {
+	_currentPolicy = f;
+}
+
 studentCollection::studentCollection () {
 	_listHead = NULL;
+	_currentPolicy = NULL;
 }
 
 studentCollection::~studentCollection () {
 	deleteList (_listHead);
 }
+
 
 //copy constructor
 //in copying you use the operator loading as exposed by the use

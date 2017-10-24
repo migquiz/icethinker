@@ -54,3 +54,7 @@ when the object is created based on the class. Somewhat "factoring out"
 for a general functionality. Templates like what we use on short messages
 or in other form . Is a base for other changes we want, though this
 changes maybe located in the server code or client code.
+
+October 24, 2017
+Finally, I have finished this book, but I have to go back on some of the
+exercises. A very great read for everyone.

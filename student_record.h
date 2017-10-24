@@ -3,6 +3,10 @@
 #include <iostream>
 using namespace std;
 
+//this is a pointer to function 
+//because of not properly indexing the codes
+//i have to put it here
+
 class studentRecord {
 public:
 	studentRecord ();

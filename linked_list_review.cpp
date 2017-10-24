@@ -44,7 +44,7 @@ int main (int argc, char ** argv) {
 
 	listPtr list_pointer = head_pointer;
 
-	while (list_pointer !=) {
+	while (list_pointer != NULL) {
 		cout << list_pointer->data << endl;
 		list_pointer = list_pointer->next;
 	}
