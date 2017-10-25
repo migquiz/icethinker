@@ -14,17 +14,25 @@ int recursive_sum(int num[], int size) {
 	int last_num = num [size-1];
 	int the_rest = recursive_sum (num, size-1);
 	//when the return value is 0 , below will be executed.
-	cout << "this is a test if called after | size: " << size << endl;
+	cout << "this is a test if called after | size: " << size << " the rest: " << the_rest << endl;
 	return last_num + the_rest; //this will not be called unless the 
 	//preceding returning value of the function in the active
 	//record (function in the stack needs to be popped out) is completed.
 	//that's how functions are stored in the memory
 }
 
+int iterative_sum (int num [], int size) {
+	int sum = 0;
+	for (int i = 0; i < size; ++i) {
+		sum += num[i];
+	}
+	return sum;
+}
+
 int main (int argc, char ** argv) {
 
 	int num[10] = {1,2,3,4,5,6,7,8,9,10};
-	cout << "The Summation: " << recursive_sum(num,10) << endl;
+	cout << "The Summation: " << recursive_sum(num,10) << " " << iterative_sum(num,10) << endl;
 	
 	return 0;
 }
