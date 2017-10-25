@@ -15,7 +15,7 @@ and other instructions not mainly from the book.
 
 ####
 
-So how memory allocation work ?
+So how memory allocation work ?  
 
 For me , what great about C++ is the use of pointers,  
 it's a compound data type that holds the address of a value.  
@@ -48,13 +48,13 @@ existing entity. Copying hence, is that the only difference is the
 right hand side is an existing object which is previously declared and  
 defined (a value was assigned to it).  
 
-Templates:
-Classes can be defined as a type agnostic, where in types are specified
-when the object is created based on the class. Somewhat "factoring out"
-for a general functionality. Templates like what we use on short messages
-or in other form . Is a base for other changes we want, though this
-changes maybe located in the server code or client code.
-
-October 24, 2017
-Finally, I have finished this book, but I have to go back on some of the
-exercises. A very great read for everyone.
+Templates:  
+Classes can be defined as a type agnostic, where in types are specified  
+when the object is created based on the class. Somewhat "factoring out"  
+for a general functionality. Templates like what we use on short messages  
+or in other form . Is a base for other changes we want, though this  
+changes maybe located in the server code or client code.  
+  
+October 24, 2017  
+Finally, I have finished this book, but I have to go back on some of the  
+exercises. A very great read for everyone.  
